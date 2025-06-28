@@ -20,7 +20,6 @@ const BaseMessageSchema = z.object({
 
 const CommandSchema = BaseMessageSchema.extend({
   type: z.literal('command'),
-  validations: z.array(z.string()).optional().describe('Business rule validations')
 }).describe('Command that triggers state changes');
 
 const EventSchema = BaseMessageSchema.extend({
@@ -30,7 +29,6 @@ const EventSchema = BaseMessageSchema.extend({
 
 const StateSchema = BaseMessageSchema.extend({
   type: z.literal('state'),
-  projectionType: z.enum(['database', 'live', 'cache']).optional()
 }).describe('State/Read Model representing a view of data');
 
 const GivenWhenThenSchema = z.object({
