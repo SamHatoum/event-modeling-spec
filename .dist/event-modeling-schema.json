@@ -1,0 +1,1803 @@
+{
+  "messageField": {
+    "$ref": "#/definitions/MessageField",
+    "definitions": {
+      "MessageField": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "Field type (e.g., string, number, Date, UUID, etc.)"
+          },
+          "required": {
+            "type": "boolean",
+            "default": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "defaultValue": {
+            "description": "Default value for optional fields"
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
+        "additionalProperties": false,
+        "description": "Field definition for a message"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "baseMessage": {
+    "$ref": "#/definitions/BaseMessage",
+    "definitions": {
+      "BaseMessage": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Message name (e.g., CustomerRegistered, RegisterCustomer)"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Field type (e.g., string, number, Date, UUID, etc.)"
+                },
+                "required": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "description": {
+                  "type": "string"
+                },
+                "defaultValue": {
+                  "description": "Default value for optional fields"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false,
+              "description": "Field definition for a message"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "number",
+                "default": 1,
+                "description": "Version number for schema evolution"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "name",
+          "fields"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "command": {
+    "$ref": "#/definitions/Command",
+    "definitions": {
+      "Command": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Message name (e.g., CustomerRegistered, RegisterCustomer)"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Field type (e.g., string, number, Date, UUID, etc.)"
+                },
+                "required": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "description": {
+                  "type": "string"
+                },
+                "defaultValue": {
+                  "description": "Default value for optional fields"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false,
+              "description": "Field definition for a message"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "number",
+                "default": 1,
+                "description": "Version number for schema evolution"
+              }
+            },
+            "additionalProperties": false
+          },
+          "type": {
+            "type": "string",
+            "const": "command"
+          },
+          "validations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Business rule validations"
+          }
+        },
+        "required": [
+          "name",
+          "fields",
+          "type"
+        ],
+        "additionalProperties": false,
+        "description": "Command that triggers state changes"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "event": {
+    "$ref": "#/definitions/Event",
+    "definitions": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Message name (e.g., CustomerRegistered, RegisterCustomer)"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Field type (e.g., string, number, Date, UUID, etc.)"
+                },
+                "required": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "description": {
+                  "type": "string"
+                },
+                "defaultValue": {
+                  "description": "Default value for optional fields"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false,
+              "description": "Field definition for a message"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "number",
+                "default": 1,
+                "description": "Version number for schema evolution"
+              }
+            },
+            "additionalProperties": false
+          },
+          "type": {
+            "type": "string",
+            "const": "event"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "internal",
+              "external"
+            ],
+            "default": "internal"
+          }
+        },
+        "required": [
+          "name",
+          "fields",
+          "type"
+        ],
+        "additionalProperties": false,
+        "description": "Event representing something that has happened"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "state": {
+    "$ref": "#/definitions/State",
+    "definitions": {
+      "State": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Message name (e.g., CustomerRegistered, RegisterCustomer)"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Field type (e.g., string, number, Date, UUID, etc.)"
+                },
+                "required": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "description": {
+                  "type": "string"
+                },
+                "defaultValue": {
+                  "description": "Default value for optional fields"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ],
+              "additionalProperties": false,
+              "description": "Field definition for a message"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "number",
+                "default": 1,
+                "description": "Version number for schema evolution"
+              }
+            },
+            "additionalProperties": false
+          },
+          "type": {
+            "type": "string",
+            "const": "state"
+          },
+          "projectionType": {
+            "type": "string",
+            "enum": [
+              "database",
+              "live",
+              "cache"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "fields",
+          "type"
+        ],
+        "additionalProperties": false,
+        "description": "State/Read Model representing a view of data"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "givenWhenThen": {
+    "$ref": "#/definitions/GivenWhenThen",
+    "definitions": {
+      "GivenWhenThen": {
+        "type": "object",
+        "properties": {
+          "given": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "eventName": {
+                  "type": "string"
+                },
+                "exampleData": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "eventName"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Pre-existing events (state)"
+          },
+          "when": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "command"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "exampleData": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            },
+            "required": [
+              "type",
+              "name"
+            ],
+            "additionalProperties": false,
+            "description": "Triggering action"
+          },
+          "then": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "event",
+                    "state"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "exampleData": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "type",
+                "name"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Expected outcome"
+          }
+        },
+        "required": [
+          "when",
+          "then"
+        ],
+        "additionalProperties": false,
+        "description": "Business rule in Given/When/Then format"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "baseSlice": {
+    "$ref": "#/definitions/BaseSlice",
+    "definitions": {
+      "BaseSlice": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Business-friendly name"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional business context"
+          },
+          "businessRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "given": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventName": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "eventName"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Pre-existing events (state)"
+                },
+                "when": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "command"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "exampleData": {
+                      "type": "object",
+                      "additionalProperties": {}
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Triggering action"
+                },
+                "then": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "event",
+                          "state"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Expected outcome"
+                }
+              },
+              "required": [
+                "when",
+                "then"
+              ],
+              "additionalProperties": false,
+              "description": "Business rule in Given/When/Then format"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "stateChange": {
+    "$ref": "#/definitions/StateChange",
+    "definitions": {
+      "StateChange": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Business-friendly name"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional business context"
+          },
+          "businessRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "given": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventName": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "eventName"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Pre-existing events (state)"
+                },
+                "when": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "command"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "exampleData": {
+                      "type": "object",
+                      "additionalProperties": {}
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Triggering action"
+                },
+                "then": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "event",
+                          "state"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Expected outcome"
+                }
+              },
+              "required": [
+                "when",
+                "then"
+              ],
+              "additionalProperties": false,
+              "description": "Business rule in Given/When/Then format"
+            }
+          },
+          "type": {
+            "type": "string",
+            "const": "stateChange"
+          },
+          "trigger": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "ui",
+                  "api",
+                  "automation"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          "stream": {
+            "type": "string",
+            "description": "Stream that this state change will write to"
+          },
+          "command": {
+            "type": "string",
+            "description": "Command name that triggers this state change"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Events produced by this state change"
+          },
+          "invariants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Business invariants to maintain"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "trigger",
+          "stream",
+          "command",
+          "events"
+        ],
+        "additionalProperties": false,
+        "description": "Pattern for changing system state (Command → Event)"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "stateView": {
+    "$ref": "#/definitions/StateView",
+    "definitions": {
+      "StateView": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Business-friendly name"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional business context"
+          },
+          "businessRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "given": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventName": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "eventName"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Pre-existing events (state)"
+                },
+                "when": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "command"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "exampleData": {
+                      "type": "object",
+                      "additionalProperties": {}
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Triggering action"
+                },
+                "then": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "event",
+                          "state"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Expected outcome"
+                }
+              },
+              "required": [
+                "when",
+                "then"
+              ],
+              "additionalProperties": false,
+              "description": "Business rule in Given/When/Then format"
+            }
+          },
+          "type": {
+            "type": "string",
+            "const": "stateView"
+          },
+          "trigger": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "ui",
+                  "api",
+                  "automation"
+                ]
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Events that update this view"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "trigger",
+          "events"
+        ],
+        "additionalProperties": false,
+        "description": "Pattern for reading data (Event → State)"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "automation": {
+    "$ref": "#/definitions/Automation",
+    "definitions": {
+      "Automation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Business-friendly name"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional business context"
+          },
+          "businessRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "given": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventName": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "eventName"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Pre-existing events (state)"
+                },
+                "when": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "command"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "exampleData": {
+                      "type": "object",
+                      "additionalProperties": {}
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Triggering action"
+                },
+                "then": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "event",
+                          "state"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Expected outcome"
+                }
+              },
+              "required": [
+                "when",
+                "then"
+              ],
+              "additionalProperties": false,
+              "description": "Business rule in Given/When/Then format"
+            }
+          },
+          "type": {
+            "type": "string",
+            "const": "automation"
+          },
+          "trigger": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "event",
+                  "timer",
+                  "schedule"
+                ]
+              },
+              "events": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Events that build the TODO list"
+              },
+              "schedule": {
+                "type": "string",
+                "description": "Cron expression or interval"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Commands triggered by this automation"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "trigger",
+          "commands"
+        ],
+        "additionalProperties": false,
+        "description": "Pattern for automated processes (Event → Command)"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "translation": {
+    "$ref": "#/definitions/Translation",
+    "definitions": {
+      "Translation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Business-friendly name"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional business context"
+          },
+          "businessRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "given": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "eventName": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "eventName"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Pre-existing events (state)"
+                },
+                "when": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "command"
+                      ]
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "exampleData": {
+                      "type": "object",
+                      "additionalProperties": {}
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "name"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Triggering action"
+                },
+                "then": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "event",
+                          "state"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "exampleData": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "Expected outcome"
+                }
+              },
+              "required": [
+                "when",
+                "then"
+              ],
+              "additionalProperties": false,
+              "description": "Business rule in Given/When/Then format"
+            }
+          },
+          "type": {
+            "type": "string",
+            "const": "translation"
+          },
+          "source": {
+            "type": "string",
+            "description": "External system name"
+          },
+          "externalEvent": {
+            "type": "string",
+            "description": "External event name"
+          },
+          "internalEvents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Internal events produced"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "source",
+          "externalEvent",
+          "internalEvents"
+        ],
+        "additionalProperties": false,
+        "description": "Pattern for external system integration (External Event → Internal Event)"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "slice": {
+    "$ref": "#/definitions/Slice",
+    "definitions": {
+      "Slice": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Business-friendly name"
+              },
+              "context": {
+                "type": "string",
+                "description": "Additional business context"
+              },
+              "businessRules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "given": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "eventName": {
+                            "type": "string"
+                          },
+                          "exampleData": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "eventName"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Pre-existing events (state)"
+                    },
+                    "when": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "command"
+                          ]
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "exampleData": {
+                          "type": "object",
+                          "additionalProperties": {}
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "name"
+                      ],
+                      "additionalProperties": false,
+                      "description": "Triggering action"
+                    },
+                    "then": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "event",
+                              "state"
+                            ]
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "exampleData": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "name"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Expected outcome"
+                    }
+                  },
+                  "required": [
+                    "when",
+                    "then"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Business rule in Given/When/Then format"
+                }
+              },
+              "type": {
+                "type": "string",
+                "const": "stateChange"
+              },
+              "trigger": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "ui",
+                      "api",
+                      "automation"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source"
+                ],
+                "additionalProperties": false
+              },
+              "stream": {
+                "type": "string",
+                "description": "Stream that this state change will write to"
+              },
+              "command": {
+                "type": "string",
+                "description": "Command name that triggers this state change"
+              },
+              "events": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Events produced by this state change"
+              },
+              "invariants": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Business invariants to maintain"
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "trigger",
+              "stream",
+              "command",
+              "events"
+            ],
+            "additionalProperties": false,
+            "description": "Pattern for changing system state (Command → Event)"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/name"
+              },
+              "context": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/context"
+              },
+              "businessRules": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/businessRules"
+              },
+              "type": {
+                "type": "string",
+                "const": "stateView"
+              },
+              "trigger": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "ui",
+                      "api",
+                      "automation"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source"
+                ],
+                "additionalProperties": false
+              },
+              "events": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Events that update this view"
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "trigger",
+              "events"
+            ],
+            "additionalProperties": false,
+            "description": "Pattern for reading data (Event → State)"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/name"
+              },
+              "context": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/context"
+              },
+              "businessRules": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/businessRules"
+              },
+              "type": {
+                "type": "string",
+                "const": "automation"
+              },
+              "trigger": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "event",
+                      "timer",
+                      "schedule"
+                    ]
+                  },
+                  "events": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Events that build the TODO list"
+                  },
+                  "schedule": {
+                    "type": "string",
+                    "description": "Cron expression or interval"
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              "commands": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Commands triggered by this automation"
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "trigger",
+              "commands"
+            ],
+            "additionalProperties": false,
+            "description": "Pattern for automated processes (Event → Command)"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/name"
+              },
+              "context": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/context"
+              },
+              "businessRules": {
+                "$ref": "#/definitions/Slice/anyOf/0/properties/businessRules"
+              },
+              "type": {
+                "type": "string",
+                "const": "translation"
+              },
+              "source": {
+                "type": "string",
+                "description": "External system name"
+              },
+              "externalEvent": {
+                "type": "string",
+                "description": "External event name"
+              },
+              "internalEvents": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Internal events produced"
+              }
+            },
+            "required": [
+              "name",
+              "type",
+              "source",
+              "externalEvent",
+              "internalEvents"
+            ],
+            "additionalProperties": false,
+            "description": "Pattern for external system integration (External Event → Internal Event)"
+          }
+        ]
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  },
+  "eventModel": {
+    "$ref": "#/definitions/EventModel",
+    "definitions": {
+      "EventModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "default": "1.0.0"
+          },
+          "description": {
+            "type": "string"
+          },
+          "slices": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Business-friendly name"
+                    },
+                    "context": {
+                      "type": "string",
+                      "description": "Additional business context"
+                    },
+                    "businessRules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "given": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "eventName": {
+                                  "type": "string"
+                                },
+                                "exampleData": {
+                                  "type": "object",
+                                  "additionalProperties": {}
+                                }
+                              },
+                              "required": [
+                                "eventName"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "description": "Pre-existing events (state)"
+                          },
+                          "when": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "enum": [
+                                  "command"
+                                ]
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "exampleData": {
+                                "type": "object",
+                                "additionalProperties": {}
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "name"
+                            ],
+                            "additionalProperties": false,
+                            "description": "Triggering action"
+                          },
+                          "then": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "event",
+                                    "state"
+                                  ]
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "exampleData": {
+                                  "type": "object",
+                                  "additionalProperties": {}
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "name"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "description": "Expected outcome"
+                          }
+                        },
+                        "required": [
+                          "when",
+                          "then"
+                        ],
+                        "additionalProperties": false,
+                        "description": "Business rule in Given/When/Then format"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "stateChange"
+                    },
+                    "trigger": {
+                      "type": "object",
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "ui",
+                            "api",
+                            "automation"
+                          ]
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "source"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "stream": {
+                      "type": "string",
+                      "description": "Stream that this state change will write to"
+                    },
+                    "command": {
+                      "type": "string",
+                      "description": "Command name that triggers this state change"
+                    },
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Events produced by this state change"
+                    },
+                    "invariants": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Business invariants to maintain"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "trigger",
+                    "stream",
+                    "command",
+                    "events"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Pattern for changing system state (Command → Event)"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/name"
+                    },
+                    "context": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/context"
+                    },
+                    "businessRules": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/businessRules"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "stateView"
+                    },
+                    "trigger": {
+                      "type": "object",
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "ui",
+                            "api",
+                            "automation"
+                          ]
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "source"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Events that update this view"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "trigger",
+                    "events"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Pattern for reading data (Event → State)"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/name"
+                    },
+                    "context": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/context"
+                    },
+                    "businessRules": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/businessRules"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "automation"
+                    },
+                    "trigger": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "event",
+                            "timer",
+                            "schedule"
+                          ]
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Events that build the TODO list"
+                        },
+                        "schedule": {
+                          "type": "string",
+                          "description": "Cron expression or interval"
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "commands": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Commands triggered by this automation"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "trigger",
+                    "commands"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Pattern for automated processes (Event → Command)"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/name"
+                    },
+                    "context": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/context"
+                    },
+                    "businessRules": {
+                      "$ref": "#/definitions/EventModel/properties/slices/items/anyOf/0/properties/businessRules"
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "translation"
+                    },
+                    "source": {
+                      "type": "string",
+                      "description": "External system name"
+                    },
+                    "externalEvent": {
+                      "type": "string",
+                      "description": "External event name"
+                    },
+                    "internalEvents": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Internal events produced"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "source",
+                    "externalEvent",
+                    "internalEvents"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Pattern for external system integration (External Event → Internal Event)"
+                }
+              ]
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "authors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "name",
+          "slices"
+        ],
+        "additionalProperties": false,
+        "description": "Complete Event Model for a system"
+      }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  }
+}
